@@ -41,6 +41,33 @@ class Pedido
      */
     private $cliente;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ItemPedido", mappedBy="pedido")
+     */
+    private $pedidos;
+
+    public function __construct()
+    {
+        $this->pedidos = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|ItemPedido[]
+     */
+    public function getItemPedidos()
+    {
+        return $this->pedidos;
+    }
+
+    /**
+     * @return \Ramsey\Uuid\Uuid
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
     public function getCliente(): Pessoa
     {
         return $this->cliente;
@@ -50,6 +77,7 @@ class Pedido
     {
         $this->cliente = $cliente;
     }
+
 
     /**
      * @return mixed
