@@ -32,6 +32,24 @@ class Pessoa
     protected $dataNascimento;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Pedido", mappedBy="pessoa")
+     */
+    private $pedidos;
+
+    public function __construct()
+    {
+        $this->pedidos = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Pedido[]
+     */
+    public function getPedidos()
+    {
+        return $this->pedidos;
+    }
+
+    /**
      * @return \Ramsey\Uuid\Uuid
      */
     public function getId()
