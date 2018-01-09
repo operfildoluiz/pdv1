@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProdutoRepository")
@@ -21,16 +22,19 @@ class Produto
 
     /**
      * @ORM\Column(type="string", name="codigo", length=255, unique=true, nullable=false)
+     * @Assert\NotBlank(message="Codigo não pode ficar em branco")
      */
     protected $codigo;
 
     /**
      * @ORM\Column(type="string", name="nome", length=255, unique=true, nullable=false)
+     * @Assert\NotBlank(message="Nome não pode ficar em branco")
      */
     protected $nome;
 
     /**
      * @ORM\Column(type="decimal", name="precoUnitario", nullable=false, scale=2, precision=10)
+     * @Assert\NotBlank(message="Preço não pode ficar em branco")
      */
     protected $precoUnitario;
 
