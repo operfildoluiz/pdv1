@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -23,11 +24,14 @@ class Pessoa
 
     /**
      * @ORM\Column(type="string", name="nome", length=255, unique=true, nullable=false)
+     * @Assert\NotBlank(message="Nome não pode ficar em branco")
      */
     protected $nome;
 
     /**
      * @ORM\Column(type="date", name="dataNascimento", nullable=false)
+     * @Assert\NotBlank(message="Data Nascimento não pode ficar em branco")
+     * @Assert\Date(message="Insira uma data válida")
      */
     protected $dataNascimento;
 

@@ -13,16 +13,16 @@ class PessoaRepository extends ServiceEntityRepository
         parent::__construct($registry, Pessoa::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function findByTerm($term)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.something = :value')->setParameter('value', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->where("p.nome LIKE :nome")->setParameter('nome', "%$term%")
+            ->orWhere("p.dataNascimento LIKE :dataNascimento")->setParameter('dataNascimento', "%$term%")
+            ->orderBy('p.nome', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 }

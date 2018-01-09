@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Cadastrar Cliente{% endblock %}
+{% block content %}
+<form action="{{path('pessoa_store')}}" method="POST">
+    <div class="row cleafix">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" class="form-control" name="nome" placeholder="Insira o nome completo" required />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Data de Nascimento</label>
+                <input type="text" maxlenght="10" class="form-control" name="dataNascimento" data-mask="00/00/0000" required placeholder="dd/mm/aaaa" />
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-fill pull-right">Cadastrar</button>
+    <div class="clearfix"></div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script src="/js/jquery.mask.js" type="text/javascript"></script>
+
+{% if duplicado is defined %}
+<script>
+    $.notify({
+        icon: 'pe-7s-delete-user',
+        message: "Esse cliente já foi cadastrado"
+    },{
+        type: 'danger'
+    });
+</script>
+{% endif %}
+
+
+{% if errors is defined %}
+{% for error in errors %}
+<script>
+    $.notify({
+        icon: 'pe-7s-attention',
+        message: "{{error}}"
+    },{
+        type: 'danger'
+    });
+</script>
+{% endfor %}
+{% endif %}
+{% endblock %}
