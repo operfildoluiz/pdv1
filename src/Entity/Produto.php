@@ -3,12 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PessoaRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProdutoRepository")
  */
-class Pessoa
+class Produto
 {
     /**
      * @var \Ramsey\Uuid\Uuid
@@ -20,6 +19,10 @@ class Pessoa
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string", name="codigo", length=255, unique=true, nullable=false)
+     */
+    protected $codigo;
 
     /**
      * @ORM\Column(type="string", name="nome", length=255, unique=true, nullable=false)
@@ -27,9 +30,10 @@ class Pessoa
     protected $nome;
 
     /**
-     * @ORM\Column(type="date", name="dataNascimento", nullable=false)
+     * @ORM\Column(type="decimal", name="precoUnitario", nullable=false, scale=2, precision=10)
      */
-    protected $dataNascimento;
+    protected $precoUnitario;
+
 
     /**
      * @return \Ramsey\Uuid\Uuid
@@ -37,6 +41,26 @@ class Pessoa
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    /**
+     * @param mixed $codigo
+     *
+     * @return self
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
     }
 
     /**
@@ -62,19 +86,19 @@ class Pessoa
     /**
      * @return mixed
      */
-    public function getDataNascimento()
+    public function getPrecoUnitario()
     {
-        return $this->dataNascimento;
+        return $this->precoUnitario;
     }
 
     /**
-     * @param mixed $dataNascimento
+     * @param mixed $precoUnitario
      *
      * @return self
      */
-    public function setDataNascimento($dataNascimento)
+    public function setPrecoUnitario($precoUnitario)
     {
-        $this->dataNascimento = $dataNascimento;
+        $this->precoUnitario = $precoUnitario;
 
         return $this;
     }
