@@ -13,16 +13,15 @@ class ProdutoRepository extends ServiceEntityRepository
         parent::__construct($registry, Produto::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findByTerm($term)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.something = :value')->setParameter('value', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->where("p.nome LIKE :nome")->setParameter('nome', "%$term%")
+            ->orWhere("p.codigo LIKE :codigo")->setParameter('codigo', "%$term%")
+            ->orWhere("p.precoUnitario LIKE :precoUnitario")->setParameter('precoUnitario', "%$term%")
+            ->orderBy('p.nome', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 }
