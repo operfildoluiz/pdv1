@@ -171,6 +171,9 @@ class ProdutoController extends Controller {
 
         } catch (\Exception $e) {
 
+            if ($e->getErrorCode() == 1451)
+                return $this->redirectToRoute('produto_index', ['message' => "Esse produto não pode ser removido pois existe um pedido que o contém."]);
+
             return $this->redirectToRoute('produto_index', ['message' => "Um erro inesperado aconteceu"]);
         }
 
