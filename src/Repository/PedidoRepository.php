@@ -13,16 +13,16 @@ class PedidoRepository extends ServiceEntityRepository
         parent::__construct($registry, Pedido::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findByTerm($term)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.something = :value')->setParameter('value', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->where("p.numero LIKE :numero")->setParameter('numero', "%$term%")
+            ->orWhere("p.emissao LIKE :emissao")->setParameter('emissao', "%$term%")
+            ->orWhere("p.total LIKE :total")->setParameter('total', "%$term%")
+            ->orderBy('p.numero', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 }
