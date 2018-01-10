@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PedidoRepository")
  */
-class Pedido
+class Pedido implements \JsonSerializable
 {
+    public function jsonSerialize() {
+        return (object) get_object_vars($this);
+    }
+
     /**
      * @var \Ramsey\Uuid\Uuid
      *
@@ -20,8 +25,7 @@ class Pedido
     protected $id;
 
     /**
-     * @ORM\Column(type="integer", name="numero", unique=true, nullable=false)
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="numero", type="integer", nullable=true)
      */
     protected $numero;
 
@@ -40,6 +44,7 @@ class Pedido
      * @ORM\JoinColumn(nullable=true)
      */
     private $cliente;
+
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ItemPedido", mappedBy="pedido")
@@ -67,7 +72,6 @@ class Pedido
         return $this->id;
     }
 
-
     public function getCliente(): Pessoa
     {
         return $this->cliente;
@@ -77,7 +81,6 @@ class Pedido
     {
         $this->cliente = $cliente;
     }
-
 
     /**
      * @return mixed

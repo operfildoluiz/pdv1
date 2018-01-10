@@ -9,8 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PessoaRepository")
  */
-class Pessoa
+class Pessoa implements \JsonSerializable
 {
+    public function jsonSerialize() {
+        return (object) get_object_vars($this);
+    }
+
     /**
      * @var \Ramsey\Uuid\Uuid
      *

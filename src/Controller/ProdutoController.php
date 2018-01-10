@@ -39,6 +39,12 @@ class ProdutoController extends Controller {
 
         $produtos = $em->getRepository(Produto::class)->findByTerm($request->request->get('term'));
 
+        if ($request->request->get('api') != null) {
+
+            return $this->json($produtos);
+        }
+
+
         return $this->render('produto/list.html.twig', ['produtos' => $produtos]);
     }
 

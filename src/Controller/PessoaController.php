@@ -24,6 +24,11 @@ class PessoaController extends Controller {
 
         $pessoas = $em->getRepository(Pessoa::class)->findAll();
 
+        if ($request->request->get('api') != null) {
+
+            return $this->json($pessoas);
+        }
+
         return $this->render('pessoa/list.html.twig', ['pessoas' => $pessoas, 'message' => $message]);
     }
 

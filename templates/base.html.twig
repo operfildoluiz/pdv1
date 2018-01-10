@@ -16,7 +16,8 @@
         <div class="sidebar-wrapper">
             <div class="logo"><a href="/" class="simple-text">PDV1 |̣ DB1</a></div>
             <ul class="nav">
-                <li class="active"><a href=""><i class="pe-7s-cart"></i><p>Fazer Pedido</p></a></li>
+                <li class="active"><a href="{{path('pedido_create')}}"><i class="pe-7s-cart"></i><p>Fazer Pedido</p></a></li>
+                <li><a href="{{path('pedido_index')}}"><i class="pe-7s-note"></i><p>Pedidos</p></a></li>
                 <li><a href="{{path('produto_index')}}"><i class="pe-7s-shopbag"></i><p>Produtos</p></a></li>
                 <li><a href="{{path('pessoa_index')}}"><i class="pe-7s-users"></i><p>Clientes</p></a></li>
             </ul>
