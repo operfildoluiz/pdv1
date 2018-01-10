@@ -26,6 +26,12 @@ class ItemPedido
     private $produto;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pedido", inversedBy="item_pedidos")
+     * @ORM\JoinColumn(nullable=true, referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $pedido;
+
+    /**
      * @ORM\Column(type="decimal", name="quantidade", nullable=false, scale=2, precision=10)
      */
     protected $quantidade;
@@ -61,6 +67,16 @@ class ItemPedido
     public function setProduto(Produto $produto)
     {
         $this->produto = $produto;
+    }
+
+    public function getPedido(): Pedido
+    {
+        return $this->pedido;
+    }
+
+    public function setPedido(Pedido $pedido)
+    {
+        $this->pedido = $pedido;
     }
 
     /**
