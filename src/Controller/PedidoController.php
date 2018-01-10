@@ -31,6 +31,21 @@ class PedidoController extends Controller {
     }
 
     /**
+     * @Route("/pedido/search", name="pedido_search")
+     */
+    public function search(Request $request) {
+
+        if ($request->request->get('term') == null)
+            return $this->redirectToRoute('pedido_index', ['message' => "Digite um termo para a busca"]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $pedidos = $em->getRepository(Pedido::class)->findByTerm($request->request->get('term'));
+
+        return $this->render('pedido/list.html.twig', ['pedidos' => $pedidos]);
+    }
+
+    /**
      * @Route("/pedido_details/{id}", name="pedido_details")
      */
     public function details($id) {
