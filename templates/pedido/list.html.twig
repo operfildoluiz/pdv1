@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block title %}Lista de Pedidos{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-9">
+        <form action="{{path('pedido_search')}}" method="POST">
+            <div class="input-group">
+                <input type="text" name="term" class="form-control" placeholder="Procurar por...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Pesquisar</button>
+                </span>
+            </div>
+        </form><br>
+    </div>
+    <div class="col-md-3">
+        <a href="{{path('pedido_create')}}" class="btn btn-success btn-block">Novo</a>
+    </div>
+</div>
+
+
+<div class="table-responsive">
+    {% if pedidos is defined %}
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Número do Pedido</th>
+                <th>Data de Emissão</th>
+                <th>Total</th>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{pedido.numero}}</td>
+                <td>{{pedido.emissao|date('d/m/Y')}}</td>
+                <td>R$ {{pedido.total|replace({'.':','})}}</td>
+                <td><a href="{{path('pedido_details', {'id': pedido.id})}}">Ver detalhes</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if app.request.get('message') is defined and app.request.get('message') != null %}
+<script>
+    $.notify({
+        icon: 'pe-7s-info',
+        message: "{{app.request.get('message')}}"
+    }, {
+        type: 'warning'
+    });
+</script>
+{% endif %}
+{% endblock %}

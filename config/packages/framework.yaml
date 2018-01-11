@@ -23,3 +23,5 @@ framework:
         # redis
         # app: cache.adapter.redis
         # default_redis_provider: redis://localhost
+
+    test: ~

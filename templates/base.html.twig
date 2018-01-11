@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="light/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>{% block title %}PDV1{% endblock %}</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="red" data-image="/light/img/sidebar-4.jpg">
+        <div class="sidebar-wrapper">
+            <div class="logo"><a href="/" class="simple-text">PDV1 |̣ DB1</a></div>
+            <ul class="nav">
+                <li class="active"><a href="{{path('pedido_create')}}"><i class="pe-7s-cart"></i><p>Fazer Pedido</p></a></li>
+                <li><a href="{{path('pedido_index')}}"><i class="pe-7s-note"></i><p>Pedidos</p></a></li>
+                <li><a href="{{path('produto_index')}}"><i class="pe-7s-shopbag"></i><p>Produtos</p></a></li>
+                <li><a href="{{path('pessoa_index')}}"><i class="pe-7s-users"></i><p>Clientes</p></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#"><p>PDV1 {{ block('title') }}</p></a>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="header">
+                    <h4 class="title">{{ block('title') }}</h4>
+                        <p class="category">{% block help %}{% endblock %}</p>
+                    </div>
+                    <div class="content">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script src="/js/jquery.3.2.1.min.js" type="text/javascript"></script> <script src="/js/bootstrap.min.js" type="text/javascript"></script> <script src="/js/bootstrap-notify.js"></script> <script src="/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+{% block scripts %}{% endblock %}
+</html>

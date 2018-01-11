@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title %}Lista de Pedidos{% endblock %}
+{% block help %}Pedido nº {{pedido.numero}} - Emissão: {{pedido.emissao|date('d/m/Y')}} {% endblock %}
+{% block content %}
+
+<a href="{{path('pedido_delete', {'id': pedido.id})}}" class="btn btn-lg pull-right btn-danger btn-fill">Remover pedido</a>
+<p>Pedido realizado por <b>{{pedido.cliente.nome}}</b></p>
+<h3 class="title">Valor total: R$ {{pedido.total|replace({'.':','})}}</h3>
+<div class="clearfix"><hr></div>
+<div class="table-responsive">
+    {% if pedido.itempedidos is defined %}
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Desconto</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pedido.itempedidos %}
+            <tr>
+                <td>{{item.produto.nome}}</td>
+                <td>R$ {{item.precoUnitario|replace({'.':','})}}</td>
+                <td>{{item.quantidade}}</td>
+                <td>{{item.percentualDesconto}} %</td>
+                <td>R$ {{item.total|replace({'.':','})}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        oi
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if app.request.get('message') is defined and app.request.get('message') != null %}
+<script>
+    $.notify({
+        icon: 'pe-7s-info',
+        message: "{{app.request.get('message')}}"
+    }, {
+        type: 'warning'
+    });
+</script>
+{% endif %}
+{% endblock %}
