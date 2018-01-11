@@ -9,11 +9,9 @@ class StartTest extends WebTestCase {
     public function testLive() {
 
         $client = static::createClient(['environment' => 'dev']);
+        $client->request('GET', "/echo");
 
-        $name = "John";
-        $client->request('GET', "/live/$name");
-
-        $this->assertEquals("Olá, John! Estamos ao vivo.", $client->getResponse()->getContent());
+        $this->assertEquals("Live", $client->getResponse()->getContent());
 
     }
 
