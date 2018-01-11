@@ -16,4 +16,17 @@ class HomeController extends Controller {
 
         return $this->render('index.html.twig');
     }
+
+    /**
+     * @Route("/echo", name="echo_test")
+     */
+    public function test() {
+
+        /*
+         * Esse método é utilizado por tests/RoutingTest.php que verifica o roteamento.
+         * Caso receba "Live", o sistema de rotas está funcionando.
+         */
+
+        return new Response("Live");
+    }
 }
