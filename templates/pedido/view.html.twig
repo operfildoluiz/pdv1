@@ -14,6 +14,7 @@
             <tr>
                 <th>Nome do Produto</th>
                 <th>Valor</th>
+                <th>Quantidade</th>
                 <th>Desconto</th>
                 <th>Valor Total</th>
             </tr>
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{item.produto.nome}}</td>
                 <td>R$ {{item.precoUnitario|replace({'.':','})}}</td>
+                <td>{{item.quantidade}}</td>
                 <td>{{item.percentualDesconto}} %</td>
                 <td>R$ {{item.total|replace({'.':','})}}</td>
             </tr>
